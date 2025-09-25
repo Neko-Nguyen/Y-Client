@@ -1,8 +1,9 @@
-import "./Login.css";
+import "../styles/Login.css";
 import { useState, useContext } from "react";
 import { useNavigate } from 'react-router-dom'
 import axios from "axios";
 import { AuthContext } from "../helpers/AuthContext";
+import { ApiEndpointContext } from "../helpers/ApiEndpointContext";
 
 function Login() {
    let navigate = useNavigate();
@@ -10,10 +11,11 @@ function Login() {
    const [username, setUsername] = useState("");
    const [password, setPassword] = useState("");
    const { setAuthState } = useContext(AuthContext);
+   const api = useContext(ApiEndpointContext);
 
    const login = () => {
       const data = {username: username, password: password};
-      axios.post("http://localhost:3001/users/login", data).then((response) => {
+      axios.post(`${api}/users/login`, data).then((response) => {
          if (response.data.error) {
             alert(response.data.error);
          } else {

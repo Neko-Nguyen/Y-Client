@@ -1,13 +1,15 @@
-import "./CreatePost.css";
+import "../styles/CreatePost.css";
 import { useEffect, useContext } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../helpers/AuthContext";
+import { ApiEndpointContext } from "../helpers/ApiEndpointContext";
 
 function CreatePost() {
    const { authState } = useContext(AuthContext);
+   const api = useContext(ApiEndpointContext);
    let navigate = useNavigate();
 
    useEffect(() => {
@@ -22,7 +24,7 @@ function CreatePost() {
 
    const onSubmit = (data) => {
       axios
-         .post("http://localhost:3001/posts", data, {
+         .post(`${api}/posts`, data, {
                headers: {
                   accessToken: localStorage.getItem("accessToken")
                }

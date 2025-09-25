@@ -1,7 +1,7 @@
-import "./App.css";
+import "./styles/App.css";
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import { AuthContext } from "./helpers/AuthContext";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import Home from "./pages/Home";
 import CreatePost from "./pages/CreatePost";
@@ -10,6 +10,7 @@ import Login from "./pages/Login";
 import Signin from "./pages/Signin";
 import Profile from "./pages/Profile";
 import PageNotFound from "./pages/PageNotFound";
+import { ApiEndpointContext } from "./helpers/ApiEndpointContext";
 
 function App() {
   const [authState, setAuthState] = useState({
@@ -18,10 +19,11 @@ function App() {
     status: false
   });
   const [loading, setLoading] = useState(true);
+  const api = useContext(ApiEndpointContext);
 
   useEffect(() => {
     axios
-      .get("http://localhost:3001/users/auth", { 
+      .get(`${api}/users/auth`, { 
         headers: {
           accessToken: localStorage.getItem("accessToken"),
         },
