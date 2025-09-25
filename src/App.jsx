@@ -11,6 +11,7 @@ import Signin from "./pages/Signin";
 import Profile from "./pages/Profile";
 import PageNotFound from "./pages/PageNotFound";
 import { ApiEndpointContext } from "./helpers/ApiEndpointContext";
+import { StorageContext } from "./helpers/StorageContext";
 
 function App() {
   const [authState, setAuthState] = useState({
@@ -20,12 +21,13 @@ function App() {
   });
   const [loading, setLoading] = useState(true);
   const api = useContext(ApiEndpointContext);
+  const storage = useContext(StorageContext);
 
   useEffect(() => {
     axios
       .get(`${api}/users/auth`, { 
         headers: {
-          accessToken: localStorage.getItem("accessToken"),
+          accessToken: localStorage.getItem(storage),
         },
       })
       .then((response) => {
@@ -49,7 +51,7 @@ function App() {
   }, []);
 
   const logout = () => {
-    localStorage.removeItem("accessToken");
+    localStorage.removeItem(storage);
     setAuthState({
       username: "",
       id: 0,

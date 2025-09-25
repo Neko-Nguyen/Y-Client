@@ -5,11 +5,13 @@ import axios from "axios";
 import { FavoriteBorder, Favorite } from "@mui/icons-material";
 import { AuthContext } from "../helpers/AuthContext";
 import { ApiEndpointContext } from "../helpers/ApiEndpointContext";
+import { StorageContext } from "../helpers/StorageContext";
 
 function Home() {
    const [listOfPosts, setListOfPosts] = useState([]);
    const { authState } = useContext(AuthContext);
    const api = useContext(ApiEndpointContext);
+   const storage = useContext(StorageContext);
    let navigate = useNavigate();
 
    useEffect(() => {
@@ -35,7 +37,7 @@ function Home() {
                   PostId: postId
                }, {
                   headers: {
-                     accessToken: localStorage.getItem("accessToken")
+                     accessToken: localStorage.getItem(storage)
                   }
                })
             .then((response) => {

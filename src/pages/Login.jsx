@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import axios from "axios";
 import { AuthContext } from "../helpers/AuthContext";
 import { ApiEndpointContext } from "../helpers/ApiEndpointContext";
+import { StorageContext } from "../helpers/StorageContext";
 
 function Login() {
    let navigate = useNavigate();
@@ -12,6 +13,7 @@ function Login() {
    const [password, setPassword] = useState("");
    const { setAuthState } = useContext(AuthContext);
    const api = useContext(ApiEndpointContext);
+   const storage = useContext(StorageContext);
 
    const login = () => {
       const data = {username: username, password: password};
@@ -19,7 +21,7 @@ function Login() {
          if (response.data.error) {
             alert(response.data.error);
          } else {
-            localStorage.setItem("accessToken", response.data.token);
+            localStorage.setItem(storage, response.data.token);
             setAuthState({
                username: response.data.username,
                id: response.data.id,

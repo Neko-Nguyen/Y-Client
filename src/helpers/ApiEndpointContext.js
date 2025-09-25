@@ -1,9 +1,6 @@
-import { createContext } from "react";
+import { createContext, useContext } from "react";
+import { IS_LOCAL_SERVER, LOCAL_API, REMOTE_API } from "./Constants";
 
-const LOCAL_API = "http://localhost:3001";
-const PROD_API = "https://y-neko-nguyen-795f0d434f9d.herokuapp.com";
-
-const useProd = true;
-const api = useProd ? PROD_API : LOCAL_API;
+const api = IS_LOCAL_SERVER ? LOCAL_API : REMOTE_API;
 
 export const ApiEndpointContext = createContext(api);

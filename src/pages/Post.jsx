@@ -4,6 +4,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "../helpers/AuthContext";
 import { ApiEndpointContext } from "../helpers/ApiEndpointContext";
+import { StorageContext } from "../helpers/StorageContext";
 
 function Post() {
    let { id } = useParams();
@@ -12,6 +13,7 @@ function Post() {
    const [newComment, setNewComment] = useState("");
    const { authState } = useContext(AuthContext);
    const api = useContext(ApiEndpointContext);
+   const storage = useContext(StorageContext);
    let navigate = useNavigate();
 
    useEffect(() => {
@@ -31,7 +33,7 @@ function Post() {
                PostId: id,
             }, {
                headers: {
-                  accessToken: localStorage.getItem("accessToken")
+                  accessToken: localStorage.getItem(storage)
                }
             }
          )
@@ -50,7 +52,7 @@ function Post() {
       axios
          .delete(`${api}/comments/${id}`, {
             headers: {
-               accessToken: localStorage.getItem("accessToken")
+               accessToken: localStorage.getItem(storage)
             }
          })
          .then(() => {
@@ -64,7 +66,7 @@ function Post() {
       axios
          .delete(`${api}/posts/${postObject.id}`, {
             headers: {
-               accessToken: localStorage.getItem("accessToken")
+               accessToken: localStorage.getItem(storage)
             }
          })
          .then(() => {
