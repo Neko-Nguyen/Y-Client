@@ -90,6 +90,7 @@ function App() {
           </div>
           
           <Routes>
+            <Route path="/" exact element={<Home/>}/>
             <Route path="/home" exact element={<Home/>}/>
             <Route path="/createpost" exact element={<CreatePost/>}/>
             <Route path="/post/:id" exact element={<Post/>}/>
