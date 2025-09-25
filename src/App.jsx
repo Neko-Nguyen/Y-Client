@@ -11,7 +11,7 @@ import Signin from "./pages/Signin";
 import Profile from "./pages/Profile";
 import PageNotFound from "./pages/PageNotFound";
 import { ApiEndpointContext } from "./helpers/ApiEndpointContext";
-import { StorageContext } from "./helpers/StorageContext";
+import { storage } from "./helpers/Storage";
 
 function App() {
   const [authState, setAuthState] = useState({
@@ -21,7 +21,6 @@ function App() {
   });
   const [loading, setLoading] = useState(true);
   const api = useContext(ApiEndpointContext);
-  const storage = useContext(StorageContext);
 
   useEffect(() => {
     axios

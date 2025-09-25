@@ -6,6 +6,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../helpers/AuthContext";
 import { ApiEndpointContext } from "../helpers/ApiEndpointContext";
+import { storage } from "../helpers/Storage";
 
 function CreatePost() {
    const { authState } = useContext(AuthContext);
@@ -26,10 +27,11 @@ function CreatePost() {
       axios
          .post(`${api}/posts`, data, {
                headers: {
-                  accessToken: localStorage.getItem("accessToken")
+                  accessToken: localStorage.getItem(storage)
                }
             })
          .then((response) => {
+            console.log(response);
             navigate("/home");
          });
    };

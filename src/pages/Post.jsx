@@ -4,7 +4,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "../helpers/AuthContext";
 import { ApiEndpointContext } from "../helpers/ApiEndpointContext";
-import { StorageContext } from "../helpers/StorageContext";
+import { storage } from "../helpers/Storage";
 
 function Post() {
    let { id } = useParams();
@@ -13,7 +13,6 @@ function Post() {
    const [newComment, setNewComment] = useState("");
    const { authState } = useContext(AuthContext);
    const api = useContext(ApiEndpointContext);
-   const storage = useContext(StorageContext);
    let navigate = useNavigate();
 
    useEffect(() => {
@@ -35,8 +34,7 @@ function Post() {
                headers: {
                   accessToken: localStorage.getItem(storage)
                }
-            }
-         )
+            })
          .then((response) => {
             if (response.data.error) {
                alert(response.data.error);
@@ -77,6 +75,7 @@ function Post() {
    return (
       <div className="main home post-full">
          <div className="post">
+            <div className="go-back"></div>
             <div className="header">
                {authState.username === postObject.username ? (
                   <button 

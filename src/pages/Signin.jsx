@@ -18,6 +18,7 @@ function Signin() {
    const onSubmit = (data) => {
       axios.post(`${api}/users`, data).then((response) => {
          navigate("/home");
+         alert("Sign in successful");
       });
    };
 

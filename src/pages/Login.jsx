@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import axios from "axios";
 import { AuthContext } from "../helpers/AuthContext";
 import { ApiEndpointContext } from "../helpers/ApiEndpointContext";
-import { StorageContext } from "../helpers/StorageContext";
+import { storage } from "../helpers/Storage";
 
 function Login() {
    let navigate = useNavigate();
@@ -13,7 +13,6 @@ function Login() {
    const [password, setPassword] = useState("");
    const { setAuthState } = useContext(AuthContext);
    const api = useContext(ApiEndpointContext);
-   const storage = useContext(StorageContext);
 
    const login = () => {
       const data = {username: username, password: password};
